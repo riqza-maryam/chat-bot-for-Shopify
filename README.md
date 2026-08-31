@@ -79,38 +79,39 @@ The model connection is server-side. The official OpenAI data controls documenta
 ---
 
 ## Project Directory
+```
 
 shopify-support-chatbot/
-app/
-  routes/
-    webhooks.orders-create.ts
-    api.chat.ts
-  services/
-    shopify.server.ts
-    knowledge.server.ts
-    assistant.server.ts
-    router.server.ts
-    slack.server.ts
-  types/
-    conversation.ts
-    handoff.ts
-knowledge/
-  README.md
-  policies.md
-  products.md
-tests/
-  orders-create.test.ts
-  routing.test.ts
-  handoff.test.ts
-.env.example
-shopify.app.toml
-package.json
-tsconfig.json
-README.md
+├── app/
+│   ├── routes/
+│   │   ├── webhooks.orders-create.ts
+│   │   └── api.chat.ts
+│   ├── services/
+│   │   ├── shopify.server.ts
+│   │   ├── knowledge.server.ts
+│   │   ├── assistant.server.ts
+│   │   ├── router.server.ts
+│   │   └── slack.server.ts
+│   └── types/
+│       ├── conversation.ts
+│       └── handoff.ts
+├── knowledge/
+│   ├── README.md
+│   ├── policies.md
+│   └── products.md
+├── tests/
+│   ├── orders-create.test.ts
+│   ├── routing.test.ts
+│   └── handoff.test.ts
+├── .env.example
+├── shopify.app.toml
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 The directory separates event intake, answer generation, routing, and notification so each failure can be reproduced independently. `webhooks.orders-create.ts` owns the incoming order event. `api.chat.ts` accepts the question. The service files isolate store access, knowledge loading, model calls, route selection, and Slack posting. Tests mirror the same boundaries: an order-event test checks ingestion, a routing test checks both terminal states, and a handoff test checks the outbound payload without requiring the full storefront path.
 
----
 
 ## Performance and Reliability Checks
 
